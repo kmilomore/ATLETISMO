@@ -17,10 +17,11 @@ function getEscuelas() {
     }
 
     var headers = datos[0].map(function(h) { return h.toString().toLowerCase().trim(); });
-    var idxNombre  = headers.indexOf('nombre');
-    var idxId      = headers.indexOf('id');
-    var idxRbd     = headers.indexOf('rbd');
-    var idxComuna  = headers.indexOf('comuna');
+    var idxNombre      = headers.indexOf('nombre');
+    var idxId          = headers.indexOf('id');
+    var idxRbd         = headers.indexOf('rbd');
+    var idxComuna      = headers.indexOf('comuna');
+    var idxDependencia = headers.indexOf('dependencia');
 
     // Si no hay columna "id", usamos el índice de fila como id
     var escuelas = [];
@@ -30,10 +31,11 @@ function getEscuelas() {
       if (!nombre || nombre.toString().trim() === '') continue;
 
       escuelas.push({
-        id:     idxId >= 0    ? fila[idxId].toString().trim()   : (i).toString(),
-        nombre: nombre.toString().trim(),
-        rbd:    idxRbd >= 0   ? fila[idxRbd].toString().trim()  : '',
-        comuna: idxComuna >= 0 ? fila[idxComuna].toString().trim() : '',
+        id:          idxId >= 0          ? fila[idxId].toString().trim()          : (i).toString(),
+        nombre:      nombre.toString().trim(),
+        rbd:         idxRbd >= 0         ? fila[idxRbd].toString().trim()         : '',
+        comuna:      idxComuna >= 0      ? fila[idxComuna].toString().trim()      : '',
+        dependencia: idxDependencia >= 0 ? fila[idxDependencia].toString().trim() : '',
       });
     }
 

@@ -7,6 +7,7 @@ export interface Escuela {
   nombre: string
   rbd?: string
   comuna?: string
+  dependencia?: string
 }
 
 export interface Estudiante {
@@ -27,6 +28,8 @@ export interface Estudiante {
 export interface FormularioData {
   escuelaId: string
   nombreEstablecimiento: string
+  comunaEstablecimiento: string
+  dependenciaEstablecimiento: string
   nombreResponsable: string
   cargoResponsable: string
   correoResponsable: string

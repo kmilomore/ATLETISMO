@@ -160,6 +160,83 @@ function VistaInicio({ onInscripcion, onAdmin }: { onInscripcion: () => void; on
             Comenzar inscripción →
           </button>
         </div>
+
+        {/* Organizadores */}
+        <div className="mt-10 text-center">
+          <p
+            className="text-xs font-black uppercase tracking-widest mb-6"
+            style={{ color: 'var(--fg-3)', letterSpacing: '0.14em' }}
+          >
+            Evento organizado por
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-10">
+            {/* Municipalidad de Chimbarongo */}
+            <div className="flex flex-col items-center gap-3">
+              <div
+                style={{
+                  width: 80, height: 80,
+                  borderRadius: '50%',
+                  background: '#fff',
+                  boxShadow: '0 2px 12px rgba(0,0,0,0.10)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  padding: 8,
+                  overflow: 'hidden',
+                }}
+              >
+                <img src="/CHIMBAROGNO.svg" alt="Municipalidad de Chimbarongo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+              </div>
+              <div style={{ textAlign: 'center', maxWidth: 120 }}>
+                <div className="text-xs font-black" style={{ color: 'var(--navy-500)', lineHeight: 1.3 }}>I. Municipalidad de Chimbarongo</div>
+              </div>
+            </div>
+
+            {/* Separador */}
+            <div style={{ width: 1, height: 60, background: 'var(--border-1)' }} className="hidden sm:block" />
+
+            {/* Escuela Agrícola Las Garzas */}
+            <div className="flex flex-col items-center gap-3">
+              <div
+                style={{
+                  width: 80, height: 80,
+                  borderRadius: '50%',
+                  background: '#fff',
+                  boxShadow: '0 2px 12px rgba(0,0,0,0.10)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  padding: 8,
+                  overflow: 'hidden',
+                }}
+              >
+                <img src="/GARZAS.svg" alt="Escuela Agrícola Las Garzas" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+              </div>
+              <div style={{ textAlign: 'center', maxWidth: 120 }}>
+                <div className="text-xs font-black" style={{ color: 'var(--navy-500)', lineHeight: 1.3 }}>Escuela Agrícola Las Garzas</div>
+              </div>
+            </div>
+
+            {/* Separador */}
+            <div style={{ width: 1, height: 60, background: 'var(--border-1)' }} className="hidden sm:block" />
+
+            {/* SLEP Colchagua */}
+            <div className="flex flex-col items-center gap-3">
+              <div
+                style={{
+                  width: 80, height: 80,
+                  borderRadius: '50%',
+                  background: '#fff',
+                  boxShadow: '0 2px 12px rgba(0,0,0,0.10)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  padding: 8,
+                  overflow: 'hidden',
+                }}
+              >
+                <img src="/favicon.webp" alt="SLEP Colchagua" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+              </div>
+              <div style={{ textAlign: 'center', maxWidth: 120 }}>
+                <div className="text-xs font-black" style={{ color: 'var(--navy-500)', lineHeight: 1.3 }}>SLEP Colchagua</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
     </>
   )

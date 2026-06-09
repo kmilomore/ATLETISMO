@@ -34,6 +34,8 @@ export default function FormularioInscripcion({ onVolver }: { onVolver: () => vo
   const [form, setForm] = useState<FormularioData>({
     escuelaId: '',
     nombreEstablecimiento: '',
+    comunaEstablecimiento: '',
+    dependenciaEstablecimiento: '',
     nombreResponsable: '',
     cargoResponsable: '',
     correoResponsable: '',
@@ -76,6 +78,8 @@ export default function FormularioInscripcion({ onVolver }: { onVolver: () => vo
       ...f,
       escuelaId: id,
       nombreEstablecimiento: esc?.nombre ?? '',
+      comunaEstablecimiento: esc?.comuna ?? '',
+      dependenciaEstablecimiento: esc?.dependencia ?? '',
     }))
     setErrors((e) => ({ ...e, escuelaId: undefined }))
   }
@@ -394,6 +398,8 @@ export default function FormularioInscripcion({ onVolver }: { onVolver: () => vo
                 <div className="grid grid-cols-2 gap-x-8 gap-y-3 sm:grid-cols-3" style={{ fontSize: 13 }}>
                   {[
                     { label: 'Establecimiento', value: form.nombreEstablecimiento },
+                    { label: 'Comuna', value: form.comunaEstablecimiento || '—' },
+                    { label: 'Dependencia', value: form.dependenciaEstablecimiento || '—' },
                     { label: 'Responsable', value: form.nombreResponsable },
                     { label: 'Cargo', value: form.cargoResponsable },
                     { label: 'Correo electrónico', value: form.correoResponsable },
@@ -653,6 +659,32 @@ export default function FormularioInscripcion({ onVolver }: { onVolver: () => vo
 
               {errors.escuelaId && <span className="field-error">{errors.escuelaId}</span>}
             </div>
+
+            {/* Datos automáticos del establecimiento seleccionado */}
+            {form.escuelaId && (
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-4">
+                <div className="field">
+                  <label className="field-label">Comuna</label>
+                  <input
+                    className="input"
+                    value={form.comunaEstablecimiento || '—'}
+                    readOnly
+                    tabIndex={-1}
+                    style={{ background: 'var(--neutral-50)', color: 'var(--fg-2)', cursor: 'default' }}
+                  />
+                </div>
+                <div className="field">
+                  <label className="field-label">Dependencia</label>
+                  <input
+                    className="input"
+                    value={form.dependenciaEstablecimiento || '—'}
+                    readOnly
+                    tabIndex={-1}
+                    style={{ background: 'var(--neutral-50)', color: 'var(--fg-2)', cursor: 'default' }}
+                  />
+                </div>
+              </div>
+            )}
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               {(
