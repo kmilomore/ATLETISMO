@@ -17,11 +17,27 @@ function getEscuelas() {
     }
 
     var headers = datos[0].map(function(h) { return h.toString().toLowerCase().trim(); });
-    var idxNombre      = headers.indexOf('nombre');
-    var idxId          = headers.indexOf('id');
-    var idxRbd         = headers.indexOf('rbd');
-    var idxComuna      = headers.indexOf('comuna');
-    var idxDependencia = headers.indexOf('dependencia');
+    var idxNombre = headers.indexOf('nombre');
+    var idxId     = headers.indexOf('id');
+    var idxRbd    = headers.indexOf('rbd');
+    var idxComuna = headers.indexOf('comuna');
+
+    // Buscar dependencia por múltiples variantes del encabezado
+    var idxDependencia = -1;
+    var depVariantes = ['dependencia', 'dep', 'dependencia administrativa',
+                        'tipo dependencia', 'tipo_dependencia', 'depend'];
+    for (var d = 0; d < depVariantes.length; d++) {
+      var pos = headers.indexOf(depVariantes[d]);
+      if (pos >= 0) { idxDependencia = pos; break; }
+    }
+    // Si no se encontró por nombre, usar columna C (índice 2) como fallback
+    if (idxDependencia < 0 && datos[0].length >= 3) {
+      idxDependencia = 2;
+    }
+
+    // Loguear encabezados para diagnóstico (visible en ejecuciones de Apps Script)
+    Logger.log('Encabezados ESCUELAS: ' + JSON.stringify(datos[0]));
+    Logger.log('idx dependencia: ' + idxDependencia + ' → cabecera: ' + (datos[0][idxDependencia] || 'N/A'));
 
     // Si no hay columna "id", usamos el índice de fila como id
     var escuelas = [];
