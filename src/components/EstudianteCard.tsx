@@ -23,15 +23,19 @@ export default function EstudianteCard({ estudiante, index, error, onUpdate, onR
 
   /* Validar RUT en tiempo real cuando el campo pierde foco */
   function handleRutBlur() {
-    if (!e.rut.trim()) { setRutError(''); return }
+    if (!e.rut.trim() || e.sinRut) { setRutError(''); return }
     const { valido, mensaje } = validarRut(e.rut)
     if (!valido) {
       setRutError(mensaje ?? 'RUT inválido')
     } else {
       setRutError('')
-      // Auto-formatear al salir del campo
       onUpdate({ ...e, rut: formatearRut(e.rut) })
     }
+  }
+
+  function toggleSinRut() {
+    onUpdate({ ...e, sinRut: !e.sinRut, rut: '' })
+    setRutError('')
   }
 
   /* Auto-calcular categoría cuando cambia la fecha de nacimiento */
@@ -97,6 +101,7 @@ export default function EstudianteCard({ estudiante, index, error, onUpdate, onR
           {cat === 'Sub-14' && <span className="chip chip-info">Sub-14</span>}
           {cat === 'Juvenil' && <span className="chip chip-navy">Juvenil</span>}
           {cat === 'No válida' && <span className="chip chip-danger">Año no válido</span>}
+          {e.sinRut && <span className="chip chip-warning">Extranjero</span>}
         </div>
         <button
           className="btn btn-ghost btn-sm"
@@ -122,7 +127,7 @@ export default function EstudianteCard({ estudiante, index, error, onUpdate, onR
           </div>
         )}
 
-        {/* Fila 1: Nombre y RUT */}
+        {/* Fila 1: Nombre y RUT / Documento */}
         <div className="grid grid-cols-1 gap-4 mb-4 sm:grid-cols-2">
           <div className="field">
             <label className="field-label">Nombre completo *</label>
@@ -134,22 +139,72 @@ export default function EstudianteCard({ estudiante, index, error, onUpdate, onR
             />
             {error?.nombre && <span className="field-error">{error.nombre}</span>}
           </div>
+
           <div className="field">
-            <label className="field-label">RUT *</label>
-            <input
-              className={`input ${(error?.rut || rutError) ? 'input--error' : ''}`}
-              value={e.rut}
-              onChange={(ev) => { onUpdate({ ...e, rut: ev.target.value }); setRutError('') }}
-              onBlur={handleRutBlur}
-              placeholder="12.345.678-9"
-              autoComplete="off"
-            />
+            {/* Cabecera del campo con toggle */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 2 }}>
+              <label className="field-label" style={{ marginBottom: 0 }}>
+                {e.sinRut ? 'Documento de identidad *' : 'RUT *'}
+              </label>
+              <button
+                type="button"
+                onClick={toggleSinRut}
+                style={{
+                  fontSize: 10,
+                  fontWeight: 700,
+                  padding: '3px 8px',
+                  borderRadius: 999,
+                  border: '1px solid',
+                  cursor: 'pointer',
+                  background: e.sinRut ? 'var(--status-warning-bg)' : 'var(--neutral-100)',
+                  borderColor: e.sinRut ? 'var(--status-warning)' : 'var(--border-2)',
+                  color: e.sinRut ? 'var(--status-warning)' : 'var(--fg-3)',
+                  letterSpacing: '0.04em',
+                  textTransform: 'uppercase',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {e.sinRut ? '⚠ RUT provisorio' : 'Sin RUT (extranjero)'}
+              </button>
+            </div>
+
+            {e.sinRut ? (
+              <>
+                <input
+                  className={`input ${error?.rut ? 'input--error' : ''}`}
+                  value={e.rut}
+                  onChange={(ev) => { onUpdate({ ...e, rut: ev.target.value }); setRutError('') }}
+                  placeholder="Pasaporte / Doc. provisorio"
+                  autoComplete="off"
+                />
+                <span style={{ fontSize: 10, color: 'var(--status-warning)', fontWeight: 600, marginTop: 2 }}>
+                  Estudiante extranjero — ingrese pasaporte u otro documento
+                </span>
+              </>
+            ) : (
+              <>
+                <input
+                  className={`input ${(error?.rut || rutError) ? 'input--error' : ''}`}
+                  value={e.rut}
+                  onChange={(ev) => { onUpdate({ ...e, rut: ev.target.value }); setRutError('') }}
+                  onBlur={handleRutBlur}
+                  placeholder="12.345.678-9"
+                  autoComplete="off"
+                />
+              </>
+            )}
+
             {(rutError || error?.rut) && (
               <span className="field-error">{rutError || error?.rut}</span>
             )}
-            {!rutError && !error?.rut && e.rut && validarRut(e.rut).valido && (
+            {!e.sinRut && !rutError && !error?.rut && e.rut && validarRut(e.rut).valido && (
               <span style={{ fontSize: 11, color: 'var(--status-success)', fontWeight: 700 }}>
                 ✓ RUT válido
+              </span>
+            )}
+            {e.sinRut && !error?.rut && e.rut.trim().length >= 5 && (
+              <span style={{ fontSize: 11, color: 'var(--status-success)', fontWeight: 700 }}>
+                ✓ Documento registrado
               </span>
             )}
           </div>

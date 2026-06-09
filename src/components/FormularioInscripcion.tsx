@@ -11,6 +11,7 @@ function nuevoEstudiante(): Estudiante {
     id: crypto.randomUUID(),
     nombre: '',
     rut: '',
+    sinRut: false,
     sexo: '',
     fechaNacimiento: '',
     anioNacimiento: null,
@@ -132,15 +133,21 @@ export default function FormularioInscripcion({ onVolver }: { onVolver: () => vo
       if (!s.nombre.trim()) e.nombre = 'Nombre requerido'
 
       if (!s.rut.trim()) {
-        e.rut = 'RUT requerido'
+        e.rut = s.sinRut ? 'Ingrese el documento de identidad' : 'RUT requerido'
       } else {
         const rutNorm = normalizar(s.rut)
         if (rutsVistos.has(rutNorm)) {
-          e.rut = 'RUT duplicado en este establecimiento'
-        } else {
+          e.rut = 'Documento duplicado en este establecimiento'
+        } else if (!s.sinRut) {
           const { valido, mensaje } = validarRut(s.rut)
           if (!valido) {
             e.rut = mensaje
+          } else {
+            rutsVistos.add(rutNorm)
+          }
+        } else {
+          if (s.rut.trim().length < 5) {
+            e.rut = 'Documento demasiado corto (mín. 5 caracteres)'
           } else {
             rutsVistos.add(rutNorm)
           }

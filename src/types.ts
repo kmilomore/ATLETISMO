@@ -14,6 +14,7 @@ export interface Estudiante {
   id: string
   nombre: string
   rut: string
+  sinRut: boolean
   sexo: Sexo | ''
   fechaNacimiento: string
   anioNacimiento: number | null

@@ -80,7 +80,7 @@ function guardarInscripcion(payload) {
         correo,
         telefono,
         (est.nombre || '').trim(),
-        (est.rut    || '').trim(),
+        est.sinRut ? 'PROV-' + (est.rut || '').trim() : (est.rut || '').trim(),
         est.sexo || '',
         est.fechaNacimiento || '',
         anio,
