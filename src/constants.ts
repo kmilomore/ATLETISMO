@@ -1,10 +1,10 @@
 import type { Categoria } from './types'
 
 export const GAS_ENDPOINT =
-  'https://script.google.com/macros/s/AKfycbwSwTjH4wpum9KZjinuaWMhLAaYPzAE5J72IOwDrEH2qszxw3jF4GLo-4-hnRGY-rTT/exec'
+  import.meta.env.VITE_GAS_ENDPOINT as string
 
 export const SHEET_URL =
-  'https://docs.google.com/spreadsheets/d/1UbIfFb_A2iXlfefylK-6m5xEXY9P-fPGoSBqrNOb34c/edit'
+  import.meta.env.VITE_SHEET_URL as string
 
 export const MAX_ESTUDIANTES = 20
 export const MAX_PRUEBAS_PISTA = 2

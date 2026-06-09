@@ -1,7 +1,7 @@
 /* Skeleton pulse animation — definida en index.css como @keyframes skeleton-pulse */
 interface SkeletonBlockProps {
   height?: number | string
-  width?: string
+  width?: number | string
   radius?: number | string
   className?: string
 }
