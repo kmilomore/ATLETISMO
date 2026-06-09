@@ -29,7 +29,7 @@ function Masthead({ vistaActual, onNavAdmin }: { vistaActual: Vista; onNavAdmin:
           >
             Atletismo Escolar 2026
           </div>
-          <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div className="brand-nav-btns" style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 12 }}>
             <span className="brand-event-tag">Atletismo 2026</span>
             {vistaActual !== 'inicio' && (
               <button
@@ -71,7 +71,7 @@ function VistaInicio({ onInscripcion, onAdmin }: { onInscripcion: () => void; on
             <p className="hero-desc">
               Inscriba a sus estudiantes en el torneo comunal de atletismo. Categorías Sub-14 y Juvenil, con pruebas de pista, campo y postas para todos los establecimientos de la comunidad educativa de Colchagua.
             </p>
-            <div className="flex gap-3 flex-wrap">
+            <div className="hero-cta-buttons flex gap-3 flex-wrap">
               <button className="btn btn-primary-dark btn-lg" onClick={onInscripcion}>
                 Iniciar inscripción →
               </button>
@@ -105,6 +105,7 @@ function VistaInicio({ onInscripcion, onAdmin }: { onInscripcion: () => void; on
       {/* Cuerpo informativo */}
       <main
         id="main-content"
+        className="main-content"
         style={{ maxWidth: 1200, margin: '0 auto', padding: '56px 32px', flex: 1 }}
       >
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-12">
@@ -144,8 +145,8 @@ function VistaInicio({ onInscripcion, onAdmin }: { onInscripcion: () => void; on
 
         {/* CTA final */}
         <div
-          className="rounded-xl p-8 text-center"
-          style={{ background: 'var(--grad-hero)', color: '#fff' }}
+          className="cta-block rounded-xl text-center"
+          style={{ background: 'var(--grad-hero)', color: '#fff', padding: '40px 32px' }}
         >
           <h2
             className="text-xl font-black mb-3"

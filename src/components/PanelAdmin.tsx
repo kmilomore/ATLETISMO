@@ -85,7 +85,7 @@ export default function PanelAdmin({ onVolver }: { onVolver: () => void }) {
   return (
     <div className="page-container py-8">
       {/* Header */}
-      <div className="flex flex-wrap items-start justify-between gap-4 mb-8">
+      <div className="admin-header flex flex-wrap items-start justify-between gap-4 mb-8">
         <div>
           <div className="hero-eyebrow mb-1" style={{ color: 'var(--royal-500)' }}>
             Panel de administración
@@ -100,7 +100,7 @@ export default function PanelAdmin({ onVolver }: { onVolver: () => void }) {
             Gestión de inscripciones y métricas del torneo
           </p>
         </div>
-        <div className="flex gap-2 flex-wrap">
+        <div className="admin-header-actions flex gap-2 flex-wrap">
           <button className="btn btn-ghost btn-sm" onClick={onVolver}>
             ← Inicio
           </button>
@@ -110,7 +110,7 @@ export default function PanelAdmin({ onVolver }: { onVolver: () => void }) {
             rel="noopener noreferrer"
             className="btn btn-secondary btn-sm"
           >
-            Abrir Google Sheet ↗
+            Abrir Sheet ↗
           </a>
           <a
             href={getExportCSVUrl()}

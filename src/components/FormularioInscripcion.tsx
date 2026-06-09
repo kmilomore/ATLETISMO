@@ -341,26 +341,27 @@ export default function FormularioInscripcion({ onVolver }: { onVolver: () => vo
               style={{
                 background: 'var(--navy-500)',
                 color: '#fff',
-                padding: '20px 28px',
+                padding: '20px 20px',
                 borderRadius: '10px 10px 0 0',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 gap: 16,
+                flexWrap: 'wrap',
               }}
             >
-              <div>
+              <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', opacity: 0.75, marginBottom: 4 }}>
                   SLEP Colchagua — Sistema de Inscripción
                 </div>
-                <div style={{ fontSize: 20, fontWeight: 900, fontFamily: 'var(--font-display)', lineHeight: 1.2 }}>
+                <div style={{ fontSize: 18, fontWeight: 900, fontFamily: 'var(--font-display)', lineHeight: 1.2 }}>
                   Torneo Comunal de Atletismo Escolar 2026
                 </div>
                 <div style={{ fontSize: 12, opacity: 0.8, marginTop: 4 }}>
                   Folio de Postulación · {fechaHoy}
                 </div>
               </div>
-              <div style={{ textAlign: 'right', flexShrink: 0 }}>
+              <div className="folio-header-folio" style={{ textAlign: 'right', flexShrink: 0 }}>
                 <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', opacity: 0.7, textTransform: 'uppercase' }}>N° de folio</div>
                 <div
                   style={{
@@ -389,7 +390,7 @@ export default function FormularioInscripcion({ onVolver }: { onVolver: () => vo
               }}
             >
               {/* Datos del establecimiento */}
-              <div style={{ padding: '20px 28px', borderBottom: '1px solid var(--border-1)', background: 'var(--neutral-50)' }}>
+              <div className="folio-section" style={{ padding: '20px 20px', borderBottom: '1px solid var(--border-1)', background: 'var(--neutral-50)' }}>
                 <div
                   style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--royal-500)', marginBottom: 12 }}
                 >
