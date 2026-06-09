@@ -631,6 +631,10 @@ body {
   .btn-lg { padding: 12px 20px; font-size: 14px; }
   .card-body { padding: 16px; }
   .data-table th, .data-table td { padding: 9px 10px; }
+  .org-grid { grid-template-columns: 1fr !important; max-width: 280px; margin: 0 auto; }
+}
+@media (min-width: 641px) and (max-width: 900px) {
+  .org-grid { grid-template-columns: repeat(3, 1fr) !important; }
 }
 
 /* =========================================================

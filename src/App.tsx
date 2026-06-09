@@ -162,80 +162,86 @@ function VistaInicio({ onInscripcion, onAdmin }: { onInscripcion: () => void; on
         </div>
 
         {/* Organizadores */}
-        <div className="mt-10 text-center">
+        <div className="mt-10">
           <p
-            className="text-xs font-black uppercase tracking-widest mb-6"
+            className="text-xs font-black uppercase tracking-widest mb-6 text-center"
             style={{ color: 'var(--fg-3)', letterSpacing: '0.14em' }}
           >
             Evento organizado por
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-10">
-            {/* Municipalidad de Chimbarongo */}
-            <div className="flex flex-col items-center gap-3">
+
+          {(() => {
+            const orgs = [
+              { href: 'https://municipalidadchimbarongo.cl/', src: '/CHIMBAROGNO.svg', alt: 'Municipalidad de Chimbarongo', label: 'I. Municipalidad de Chimbarongo' },
+              { href: 'https://www.lasgarzas.cl/', src: '/GARZAS.svg', alt: 'Escuela Agrícola Las Garzas', label: 'Escuela Agrícola Las Garzas' },
+              { href: 'https://www.slepcolchagua.gob.cl/', src: '/favicon.webp', alt: 'SLEP Colchagua', label: 'SLEP Colchagua' },
+            ]
+            return (
               <div
                 style={{
-                  width: 80, height: 80,
-                  borderRadius: '50%',
-                  background: '#fff',
-                  boxShadow: '0 2px 12px rgba(0,0,0,0.10)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  padding: 8,
-                  overflow: 'hidden',
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(3, 1fr)',
+                  gap: '16px',
                 }}
+                className="org-grid"
               >
-                <img src="/CHIMBAROGNO.svg" alt="Municipalidad de Chimbarongo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                {orgs.map((org, i) => (
+                  <a
+                    key={i}
+                    href={org.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        gap: 12,
+                        padding: '20px 12px',
+                        borderRadius: 12,
+                        border: '1px solid var(--border-1)',
+                        background: '#fff',
+                        transition: 'box-shadow 0.2s, border-color 0.2s',
+                        height: '100%',
+                      }}
+                      onMouseEnter={(e) => {
+                        const el = e.currentTarget as HTMLDivElement
+                        el.style.boxShadow = '0 4px 20px rgba(0,0,0,0.12)'
+                        el.style.borderColor = 'var(--royal-300)'
+                      }}
+                      onMouseLeave={(e) => {
+                        const el = e.currentTarget as HTMLDivElement
+                        el.style.boxShadow = 'none'
+                        el.style.borderColor = 'var(--border-1)'
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: 72, height: 72,
+                          borderRadius: '50%',
+                          background: 'var(--neutral-50)',
+                          display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          padding: 8, overflow: 'hidden', flexShrink: 0,
+                        }}
+                      >
+                        <img src={org.src} alt={org.alt} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                      </div>
+                      <span
+                        style={{
+                          fontSize: 12, fontWeight: 800, color: 'var(--navy-500)',
+                          lineHeight: 1.35, textAlign: 'center',
+                        }}
+                      >
+                        {org.label}
+                      </span>
+                    </div>
+                  </a>
+                ))}
               </div>
-              <div style={{ textAlign: 'center', maxWidth: 120 }}>
-                <div className="text-xs font-black" style={{ color: 'var(--navy-500)', lineHeight: 1.3 }}>I. Municipalidad de Chimbarongo</div>
-              </div>
-            </div>
-
-            {/* Separador */}
-            <div style={{ width: 1, height: 60, background: 'var(--border-1)' }} className="hidden sm:block" />
-
-            {/* Escuela Agrícola Las Garzas */}
-            <div className="flex flex-col items-center gap-3">
-              <div
-                style={{
-                  width: 80, height: 80,
-                  borderRadius: '50%',
-                  background: '#fff',
-                  boxShadow: '0 2px 12px rgba(0,0,0,0.10)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  padding: 8,
-                  overflow: 'hidden',
-                }}
-              >
-                <img src="/GARZAS.svg" alt="Escuela Agrícola Las Garzas" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-              </div>
-              <div style={{ textAlign: 'center', maxWidth: 120 }}>
-                <div className="text-xs font-black" style={{ color: 'var(--navy-500)', lineHeight: 1.3 }}>Escuela Agrícola Las Garzas</div>
-              </div>
-            </div>
-
-            {/* Separador */}
-            <div style={{ width: 1, height: 60, background: 'var(--border-1)' }} className="hidden sm:block" />
-
-            {/* SLEP Colchagua */}
-            <div className="flex flex-col items-center gap-3">
-              <div
-                style={{
-                  width: 80, height: 80,
-                  borderRadius: '50%',
-                  background: '#fff',
-                  boxShadow: '0 2px 12px rgba(0,0,0,0.10)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  padding: 8,
-                  overflow: 'hidden',
-                }}
-              >
-                <img src="/favicon.webp" alt="SLEP Colchagua" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-              </div>
-              <div style={{ textAlign: 'center', maxWidth: 120 }}>
-                <div className="text-xs font-black" style={{ color: 'var(--navy-500)', lineHeight: 1.3 }}>SLEP Colchagua</div>
-              </div>
-            </div>
-          </div>
+            )
+          })()}
         </div>
       </main>
     </>
